@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Roboty i JavaScript czyli jak posypać ranę solą</title>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,900&amp;subset=latin-ext" rel="stylesheet"/>
+
+    <!-- Shower Theme -->
+    <link rel="stylesheet" href="vendors/shower-ribbon/styles/screen-16x9.css"/>
+    <link rel="stylesheet" href="vendors/shower-warsawjs/styles/main.css"/>
+
+    <!-- Prism.js -->
+    <link rel="stylesheet" href="vendors/prism/prism.css"/>
+    <link rel="stylesheet" href="modules/custom-prism.css"/>
+
+    <style>
+    video {
+      position: absolute;
+      width: 300px;
+      bottom: 10px;
+      right: 0;
+      z-index: 99;
+    }
+
+    .shower.full .fullscreen {
+      padding: 0;
+    }
+    </style>
+</head>
+<body class="shower list">
+    <header class="caption">
+        <h1>Roboty i JavaScript czyli jak posypać ranę solą</h1>
+        <p>Czy kiedykolwiek marzyłeś o własnym robocie, najlepiej latającym i przynoszącym piwo? Nie? Nic się nie stało, po naszej prezentacji będziesz wiedział jak dzięki Node.js, RaspberryPi i Arduino udało nam się stworzyć naszego pierwszego robota który robi więcej niż miganie diodą.</p>
+    </header>
+
+    <section class="slide front-page">
+        <div class="logo">
+            <!-- Logo WarsawJS -->
+            <img src="vendors/shower-warsawjs/images/logo.svg" width="400">
+        </div>
+        <div class="details">
+            <img src="pictures/bartek.png" alt="Bartek Legięć" width="200" />
+            <img src="pictures/kacper.jpg" alt="Kacper Pietrzak" width="200" />
+
+            <h2 style="display: none;">Bartek Legięć i Kacper Pietrzak</h2>
+            <h2>Bartek Legięć&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kacper Pietrzak</h2>
+
+            <h2><strong>„Roboty i JavaScript czyli jak posypać ranę solą”</strong></h2>
+
+            <h2>2017-12-13</h2>
+
+            <h2>
+              <a href="http://twitter.com/bibix1999" target="_blank">@bibix1999</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="http://twitter.com/pietrzakacper" target="_blank">@pietrzakacper</a></h2>
+        </div>
+    </section>
+
+    <section class="slide compact fullscreen">
+      <iframe src="http://pigam.es/MathRobot" style="width: 100%; height: 100%"></iframe>
+    </section>
+
+    <div class="progress"></div>
+
+    <footer class="badge">
+        <a href="https://github.com/PiGames/MathRobot-slides">Fork me on GitHub</a>
+    </footer>
+
+    <footer class="badge badge-top-left">
+        <a href="#" class="fullscreen">Fullscreen</a>
+    </footer>
+
+    <script src="vendors/gamepad/gamepad.js"></script>
+    <script src="vendors/shower/shower.min.js"></script>
+    <script src="vendors/shower-gamepad/shower.gamepad.js"></script>
+    <script src="vendors/shower-warsawjs/scripts/fullscreen.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+    <script src="./p5.dom.js"></script>
+    <script src="./sketch.js"></script>
+
+    <!-- Prism.js -->
+    <script src="vendors/prism/prism.js"></script>
+    <script src="modules/custom-prism.js"></script>
+</body>
+</html>
