@@ -6,6 +6,7 @@ function setup() {
   capture = createCapture(VIDEO);
   capture.size(300, 300 * (9/16));
 
+  capture.elt.classList.add("video_capture");
   capture.elt.style.width="300px"
   capture.elt.style.height="auto"
   noCanvas();
