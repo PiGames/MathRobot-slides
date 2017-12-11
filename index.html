@@ -74,23 +74,12 @@
       <h2 class="shout"><strong>Idea is everything... <br>or not</strong></h2>
     </section>
 
-    <section class="slide compact">
-      <h2>Idea is everything.... or not</h2>
-      <p>Światełka...</p>
+    <section class="slide compact" style="background: #000">
+      <video src="pictures/bbt.mp4" class="cover" controls height="100%"></video>
     </section>
 
     <section class="slide compact">
-      <video src="pictures/bbt.mp4" class="cover" controls></video>
-    </section>
-
-    <section class="slide compact">
-      <h2 class="shout"><strong>Idea is everything... <br>or not</strong></h2>
-    </section>
-
-
-    <section class="slide compact">
-      <h2>Calculator as a Service (CaaS)</h2>
-      <img src="pictures/cloud.jpg" class="cover" />
+      <h2 class="shout"><strong>Calculator as a Service</strong></h2>
     </section>
 
     <section class="slide compact">
@@ -103,8 +92,8 @@
     </section>
 
 
-    <section class="slide">
-      <figure>
+    <section class="slide compact">
+      <figure class="cover" style="font-size: 40px">
             <blockquote>
                 <p>Failure is a part of the process</p>
             </blockquote>
@@ -139,24 +128,169 @@
       <iframe src="http://pigam.es/MathRobot" style="width: 100%; height: 100%"></iframe>
     </section>
 
-    <section class="slide prism">
+    <section class="slide compact">
       <h2>How does Raspberry communicate with Arduino?</h2>
-      <pre style="font-size: 25px;" class="language-javascript line-numbers">
-            <code>
-                var monad = wrap('cookie');
-                bind(monad, (value) => {
-                    console.info(value);
-                    return wrap(value);
-                });
-                monad = bind(monad, (value) => {
-                    return wrap({ type: value });
-                });
-                bind(monad, (value) => {
-                    console.log(value);
-                    return wrap(value);
-                });
+      <ol>
+        <li class="next">JohnnyFive</li>
+        <li class="next">Firmata</li>
+        <li class="next">...</li>
+        <li class="next">Profit!</li>
+      </ol>
+    </section>
+
+    <section class="slide compact">
+      <h2>Why JohnnyFive?</h2>
+      <ul>
+        <li class="next">Supports many platforms: Ardunio, RPI, BeagleBone, etc.</li>
+        <li class="next">Creates easy to use high level API</li>
+      </ul>
+    </section>
+
+    <section class="slide prism compact">
+      <h2>JohnnyFive</h2>
+      <pre style="font-size: 4px;" class="language-javascript line-numbers">
+            <code style="line-height: 4px">#define IN1  8
+#define IN2  9
+#define IN3  10
+#define IN4  11
+int Steps = 0;
+boolean Direction = true;
+unsigned long last_time;
+unsigned long currentMillis ;
+int steps_left=4095;
+long time;
+void setup()
+{
+  Serial.begin(115200);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  // delay(1000);
+}
+
+void loop()
+{
+  while(steps_left>0){
+    currentMillis = micros();
+    if(currentMillis-last_time>=1000){
+      stepper(1);
+      time=time+micros()-last_time;
+      last_time=micros();
+      steps_left--;
+    }
+  }
+
+  delay(2000);
+  Direction=!Direction;
+  steps_left=4095;
+}
+
+void stepper(int xw){
+  for (int x=0;x&lt;xw;x++){
+    switch(Steps){
+      case 0:
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, HIGH);
+        break;
+      case 1:
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, HIGH);
+        digitalWrite(IN4, HIGH);
+        break;
+      case 2:
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, HIGH);
+        digitalWrite(IN4, LOW);
+        break;
+      case 3:
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, HIGH);
+        digitalWrite(IN3, HIGH);
+        digitalWrite(IN4, LOW);
+        break;
+      case 4:
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, HIGH);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, LOW);
+        break;
+      case 5:
+        digitalWrite(IN1, HIGH);
+        digitalWrite(IN2, HIGH);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, LOW);
+        break;
+      case 6:
+        digitalWrite(IN1, HIGH);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, LOW);
+        break;
+      case 7:
+        digitalWrite(IN1, HIGH);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, HIGH);
+        break;
+      default:
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, LOW);
+        break;
+    }
+    SetDirection();
+  }
+}
+
+void SetDirection(){
+  if(Direction==1){ Steps++;}
+  if(Direction==0){ Steps--; }
+  if(Steps>7){ Steps=0; }
+  if(Steps&lt;0){ Steps=7; }
+}
             </code>
         </pre>
+    </section>
+
+    <section class="slide prism compact">
+      <h2>JohnnyFive</h2>
+      <pre style="font-size: 21px;" class="language-javascript line-numbers">
+        <code style="line-height: 1.2">
+          import five from 'johnny-five';
+          const board = new five.Board();
+
+          board.on( 'ready', function() {
+            const stepper = new five.Stepper( {
+              type: 4,
+              stepsPerRev: 48,
+              rpm: 15000,
+              pins: [ 8, 9, 10, 11 ],
+            } );
+
+            const loop = ( dir ) => {
+              stepper.step( { steps: 4096, direction: dir }, loop.bind( null, !dir ) );
+            }
+
+            loop( 0 );
+          } );
+        </code>
+      </pre>
+    </section>
+
+    <section class="slide compact">
+      <h2>Why JohnnyFive?</h2>
+      <ul>
+        <li>Supports many platforms: Ardunio, RPI, BeagleBone, etc.</li>
+        <li>Creates easy to use high level API</li>
+        <li class="next">Works with JS!</li>
+        <li class="next">Needs host for interpreting JS</li>
+      </ul>
     </section>
 
     <section class="slide compact">
