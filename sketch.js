@@ -4,7 +4,7 @@ let isFullscreen = false;
 
 function setup() {
   capture = createCapture(VIDEO);
-  capture.size(300, 300 * (9/16));
+  capture.size(1280, 720);
 
   capture.elt.classList.add("video_capture");
   capture.elt.style.width="300px"
